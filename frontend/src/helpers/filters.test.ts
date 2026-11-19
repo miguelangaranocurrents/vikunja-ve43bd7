@@ -595,4 +595,10 @@ describe('hasFilterQuery', () => {
 		expect(hasFilterQuery('done = false')).toBe(true)
 		expect(hasFilterQuery('hello')).toBe(false)
 	})
+
+	it('does not treat plain words containing a word operator as a filter', () => {
+		expect(hasFilterQuery('meeting')).toBe(false)
+		expect(hasFilterQuery('likelihood')).toBe(false)
+		expect(hasFilterQuery('done in [1, 2]')).toBe(true)
+	})
 })
